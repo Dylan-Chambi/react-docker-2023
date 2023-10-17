@@ -52,7 +52,7 @@ jobs:
     
   build_docker_image_and_push:
     runs-on: ubuntu-20.04
-    needs: build_artifac
+    needs: [test, test_cypress]
     steps:
       - name: QEMU
         uses: docker/setup-qemu-action@v3

@@ -20,7 +20,11 @@ jobs:
       - name: Pruebas
         run: |
           npm run test
-      
+
+
+  test_cypress:
+    runs-on: ubuntu-latest
+    steps:
       - name: Pruebas Cypress
         run: |
           echo "Corriendo pruebas Cypress..."
@@ -28,8 +32,9 @@ jobs:
           echo "Tienes instalado Cypress!"
           exit 0
 
-  build:
+  build_artifac:
     runs-on: ubuntu-20.04
+    needs: [test, test_cypress]
     steps:
       - name: Checkout git
         uses: actions/checkout@v4
@@ -44,7 +49,11 @@ jobs:
         with:
           name: Build
           path: build
-
+    
+  build_docker_image_and_push:
+    runs-on: ubuntu-20.04
+    needs: build_artifac
+    steps:
       - name: QEMU
         uses: docker/setup-qemu-action@v3
 

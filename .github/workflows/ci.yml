@@ -44,3 +44,21 @@ jobs:
         with:
           name: Build
           path: build
+
+      - name: QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DYLAN_DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DYLAN_DOCKERHUB_PASSWORD }}
+
+      - name: Generar imagen docker y push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: dylanchambi/react-app:latest

@@ -2,9 +2,11 @@ name: Continous Integration
 
 on:
   push:
+    paths-ignore:
+      - '.github/workflows/**'
     branches:
       - main
-      - testbranch
+      - feature/app-js-update
   pull_request:
   
 jobs:

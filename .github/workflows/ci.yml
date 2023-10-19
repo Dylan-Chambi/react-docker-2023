@@ -6,7 +6,7 @@ on:
       - '!.github/workflows/**'
     branches:
       - main
-      - feature/app-js-update
+      - 'feature/**'
   pull_request:
   
 jobs:

@@ -30,12 +30,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pruebas Cypress
+        env:
+          variable2: "variable2"
         run: |
           echo "Corriendo pruebas Cypress..."
           echo "Pruebas correctas! Todo bien!"
           echo "Tienes instalado Cypress!"
           echo ${{ vars.EXAMPLE }}
-          echo $variable
+          echo $variable $variable2
+          echo ${{ GITHUB_REF }}
           exit 0
 
   build_artifac:
@@ -79,18 +82,3 @@ jobs:
         with:
           push: true
           tags: dylanchambi/react-app:latest
-  
-  deploy_into_dev_server:
-    runs-on: ubuntu-latest
-    needs: [build_docker_image_and_push]
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: 34.228.78.13
-          username: ec2-user
-          key: ${{ secrets.REACT_SERVER_PRIVATE_KEY }}
-          script: |
-            sudo docker stop REACT_SERVICE
-            sudo docker run -d -p 8080:80 --name REACT_SERVICE dylanchambi/react-app:latest

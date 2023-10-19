@@ -6,6 +6,9 @@ on:
       - main
       - 'feature/**'
   pull_request:
+
+env:
+  variable: "variable1"
   
 jobs:
   test:
@@ -32,6 +35,7 @@ jobs:
           echo "Pruebas correctas! Todo bien!"
           echo "Tienes instalado Cypress!"
           echo ${{ vars.EXAMPLE }}
+          echo $variable
           exit 0
 
   build_artifac:

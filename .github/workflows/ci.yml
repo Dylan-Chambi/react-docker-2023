@@ -2,8 +2,8 @@ name: Continous Integration
 
 on:
   push:
-    paths-ignore:
-      - '.github/workflows/**'
+    paths:
+      - '!.github/workflows/**'
     branches:
       - main
       - feature/app-js-update

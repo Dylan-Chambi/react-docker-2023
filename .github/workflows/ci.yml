@@ -2,8 +2,6 @@ name: Continous Integration
 
 on:
   push:
-    paths:
-      - '!.github/workflows/**'
     branches:
       - main
       - 'feature/**'
@@ -33,6 +31,7 @@ jobs:
           echo "Corriendo pruebas Cypress..."
           echo "Pruebas correctas! Todo bien!"
           echo "Tienes instalado Cypress!"
+          echo ${{ vars.EXAMPLE }}
           exit 0
 
   build_artifac:

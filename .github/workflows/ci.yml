@@ -54,6 +54,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      - name: Error
+        continue-on-error: true
+        run: |
+          exit 28
+
   build_artifac:
     runs-on: ubuntu-20.04
     needs: [test, test_cypress]
